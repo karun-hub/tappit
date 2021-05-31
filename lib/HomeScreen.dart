@@ -18,6 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
       _counter++;
     });
   }
+  void updateDelivery(String value){
+    setState(() {
+      delivey= int.parse(value);
+    });
+  }
 
   void _decrementCounter() {
     setState(() {
@@ -36,9 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _pickedDate = DateTime.now();
   }
+  int delivey;
+  int itemprice =531;
+
 
   Widget build(BuildContext context) {
     String name;
+    int sum;
     return Scaffold(
       bottomNavigationBar: Container(
         width: MediaQuery.of(context).size.width,
@@ -48,7 +57,22 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               width: 180,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () => showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Deliver Once'),
+                    content: Text("Total Amount : "+(delivey*itemprice*_counter).toString()),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'Cancel'),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),),
                 child: Text(
                   "DELIVER ONCE",
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -64,7 +88,22 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               width: 180,
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: () => showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('SUBSCRIBE'),
+                    content: Text("Total Amount : "+(delivey*itemprice*_counter).toString()),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'Cancel'),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),),
                 child: Text(
                   "SUBSCRIBE",
                   style: TextStyle(
@@ -137,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               Text(
-                                "531",
+                                itemprice.toString(),
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -371,13 +410,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     onChanged: (String newValue) {
                       setState(() {
                         dropdownValue = newValue;
+                        delivey= int.parse(newValue);
                       });
                     },
                     items: <String>['10', '20', '30']
                         .map<DropdownMenuItem<String>>((String value) {
+
+                         // updateDelivery(value);
                       return DropdownMenuItem<String>(
                         value: value,
+
                         child: Padding(
+
                           padding: const EdgeInsets.only(left: 40.0),
                           child: Text(
                             value + " Deliveries",
