@@ -1,4 +1,5 @@
-# Project Name : MyTrendz Shopping App
+# Project Name : Tappit
+
 #🔸Vedio walk through
 
 [Vedio Link](https://drive.google.com/file/d/1Td1DrweLGpR-RYNUobYL8OOIaUgAbPrG/view?usp=sharing)
